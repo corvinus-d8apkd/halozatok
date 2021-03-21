@@ -1,0 +1,15 @@
+﻿#pascal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sor{
+    display: flex;
+    flex-direction: row;
+}
+
+.elem{
+    height: 30px;
+    width: 30px;
+}
