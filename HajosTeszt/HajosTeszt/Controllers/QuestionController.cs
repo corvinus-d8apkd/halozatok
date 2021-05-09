@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 namespace HajosTeszt.Controllers
 {
     [ApiController]
-    public class BoatController : Controller
+    public class QuestionController : Controller
     {
         [HttpGet]
-        [Route("questions/all")]
-        public ActionResult M1()
+        [Route("questioins/count")]
+        public int M1()
         {
             HajostesztContext context = new HajostesztContext();
-            var kérdések = from x in context.Questions select x.QuestionText;
-
-            return new JsonResult(kérdések);
+            int kérdésekSzáma = context.Questions.Count();
+            return kérdésekSzáma;
         }
+
         [HttpGet]
         [Route("questions/{sorszám}")]
         public ActionResult M2(int sorszám)
@@ -28,18 +28,9 @@ namespace HajosTeszt.Controllers
                           where x.QuestionId == sorszám
                           select x).FirstOrDefault();
 
-            if (kérdés == null) return BadRequest("Nincs ilyen sorszámú kérdés");
+            if (kérdés == null) return BadRequest("Nincs ilyen kérdés");
 
             return new JsonResult(kérdés);
-        }
-        [HttpGet]
-        [Route("questions/count")]
-        public int M4() //Tetszőleges metódusnév
-        {
-            HajostesztContext context = new HajostesztContext();
-            int kérdésekSzáma = context.Questions.Count();
-
-            return kérdésekSzáma;
         }
     }
 }
