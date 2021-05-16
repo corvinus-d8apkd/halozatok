@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <form>
+        <div id="jokeList"></div>
+        <div>
+            <input id="jokeText" type="text" placeholder="Csak PC vicc" />
+        </div>
+        <button id="addButton">Új vicc felvétele</button>
+    </form>
+    <script>
+        function ViccBetoltes() {
+            fetch('api/jokes')
+                .then(result => {
+                    if (!result.ok) {
+                        console.error('Hibás letöltés: ${result.status}');
+                        return null;
+                    }
+                    else {
+                        return result.json();
+                    }
+                })
+                .then(data => {
+                    for (var i = 0; i < data.length; i++) {
+                        document.getElementById("viccek").innerHTML += data[i].jokeText += "<br/>"
+                    }
+                })
+                    
+        }
+    </script>
+</body>
+</html>
